@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import fs from "node:fs";
 import path from "node:path";
 
-const scriptsDir = path.resolve(__dirname, "src/");
+const scriptsDir = path.resolve(__dirname, "src/scripts");
 
 const input = Object.fromEntries(
   fs.readdirSync(scriptsDir)
@@ -14,6 +14,7 @@ const input = Object.fromEntries(
 );
 
 export default defineConfig({
+  appType: "custom",
   base: "/",
   build: {
     rollupOptions: {
