@@ -1,12 +1,21 @@
 import { defineConfig } from "vite";
-import { resolve, basename, extname } from "node:path";
-import { readdirSync } from "node:fs";
+import fs from "node:fs";
+import path from "node:path";
 
+const scriptsDir = path.resolve(__dirname, "src/scripts");
+
+const input = Object.fromEntries(
+  fs.readdirSync(scriptsDir)
+    .filter((file) => file.endsWith(".js"))
+    .map((file) => [
+      file.replace(".js", ""),
+      path.resolve(scriptsDir, file),
+    ])
+);
 
 export default defineConfig({
   base: "/",
   build: {
-    manifest: true,
     rollupOptions: {
       input,
       output: {
